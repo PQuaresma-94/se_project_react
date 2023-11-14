@@ -6,16 +6,16 @@ const Header = () => {
     return (
         <div>
             <header className="header">
-                <div className="header__logo">
-                    <img src="/images/Logo.svg" alt="Logo"/> 
-                    <div>Date and Location</div>
+                <div className="logo header__logo">
+                    <img className="logo__image" src="/images/Logo.svg" alt="Logo"/> 
+                    <div className="logo__text">Date, Location</div>
                 </div>
-                <div className="header__avatar-logo">
+                <div className="profile header__profile-logo">
                     <div>
-                        <button type="text">+ Add Clothes</button>
+                        <button className="profile__add-button" type="text">+ Add clothes</button>
                     </div>
-                    <div>Terrence Tegegne</div>
-                    <img src="/images/Avatar.svg" alt="Avatar"/>
+                    <div className="profile__name">Terrence Tegegne</div>
+                    <img className="profile__avatar" src="/images/Avatar.svg" alt="Avatar"/>
                 </div>
             </header>
         </div>
