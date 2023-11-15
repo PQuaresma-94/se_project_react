@@ -1,4 +1,3 @@
-//Add files that need to be imported
 import "./Header.css";
 
 

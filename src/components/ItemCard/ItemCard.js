@@ -1,11 +1,12 @@
 import "./ItemCard.css";
 
-
-const ItemCard = () => {
+const ItemCard = ({item}) => {
+    console.log({item})
     return (
-        <section className="card" id="card-section">
-            <div>Today is 75° F / You may want to wear:</div>
-        </section>
+        <div className="card">
+            <img className="card__image" src={item.link} alt={item.name}/>
+            <div className="card__name">{item.name}</div>
+        </div>
     );
 };
 

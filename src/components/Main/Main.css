@@ -3,3 +3,22 @@
   width: 1360px;
   margin: auto;
 }
+
+.cards {
+  padding-top: 20px;
+}
+
+.cards__information {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cards__items {
+  padding-top: 20px;
+  display: flex;
+  gap: 20px 16px;
+  flex-wrap: wrap;
+}
