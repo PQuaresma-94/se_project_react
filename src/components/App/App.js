@@ -1,4 +1,5 @@
 //import components
+import Footer from '../Footer/Footer';
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 
@@ -9,8 +10,8 @@ function App() {
     <div>
       <Header/>
       <Main/>
-      {/* <Foorter/>
-      <ModalWithForm/>
+      <Footer/>
+      {/* <ModalWithForm/>
       <ItemModal/> */}
     </div>
   );
