@@ -7,7 +7,7 @@ const Main = () => {
     return (
         <div>
             <main className="main">
-                <WeatherCard day={true} type="cloudy" />
+                <WeatherCard day={true} type="snow" />
                 <ItemCard/>
             </main>
         </div>
