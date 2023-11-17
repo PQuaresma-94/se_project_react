@@ -4,8 +4,7 @@ import {defaultClothingItems} from "../../utils/Constants"
 import "./Main.css";
 
 
-const Main = () => {
-    const weatherTemp = "102° F";
+const Main = ({weatherTemp}) => {
     return (
         <div>
             <main className="main">

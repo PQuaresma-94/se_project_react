@@ -1,7 +1,7 @@
 import "./Header.css";
 
 
-const Header = () => {
+const Header = ({onCreateModal}) => {
     return (
         <div>
             <header className="header">
@@ -11,7 +11,7 @@ const Header = () => {
                 </div>
                 <div className="profile header__profile-logo">
                     <div>
-                        <button className="profile__add-button" type="text">+ Add clothes</button>
+                        <button className="profile__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
                     </div>
                     <div className="profile__name">Terrence Tegegne</div>
                     <img className="profile__avatar" src={require("../../images/Avatar.svg").default} alt="Avatar"/>
