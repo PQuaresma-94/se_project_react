@@ -25,3 +25,8 @@
   height: 328px;
   border-radius: 19px;
 }
+
+.card__image:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

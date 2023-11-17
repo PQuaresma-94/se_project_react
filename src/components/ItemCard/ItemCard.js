@@ -1,7 +1,6 @@
 import "./ItemCard.css";
 
 const ItemCard = ({item}) => {
-    console.log({item})
     return (
         <div className="card">
             <img className="card__image" src={item.link} alt={item.name}/>
