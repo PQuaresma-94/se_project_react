@@ -1,0 +1,26 @@
+.modal__container-item {
+  padding: 0;
+}
+
+.modal__close-preview-button {
+  background: transparent url(../../images/close_preview.svg) center no-repeat;
+}
+
+.modal__image {
+  border-radius: 20px 20px 0 0;
+  width: 496px;
+  height: 496px;
+  flex-shrink: 0;
+}
+
+.modal__description {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 32px 32px 32px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}

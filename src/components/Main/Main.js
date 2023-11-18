@@ -4,7 +4,7 @@ import {defaultClothingItems} from "../../utils/Constants"
 import "./Main.css";
 
 
-const Main = ({weatherTemp}) => {
+const Main = ({weatherTemp, onSelectCard}) => {
     return (
         <div>
             <main className="main">
@@ -13,7 +13,7 @@ const Main = ({weatherTemp}) => {
                     <div className="cards__information">Today is {weatherTemp} / You may want to wear:</div>
                     <div className="cards__items">
                         {defaultClothingItems.map((item) => (
-                            <ItemCard key={item._id} item={item} />
+                            <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
                         ))}
                     </div>
                 </section>
