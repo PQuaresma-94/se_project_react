@@ -1,13 +1,13 @@
 import "./Header.css";
 
 
-const Header = ({onCreateModal}) => {
+const Header = ({ date, location, onCreateModal}) => {
     return (
         <div>
             <header className="header">
                 <div className="logo header__logo">
                     <img className="logo__image" src={require("../../images/Logo.svg").default} alt="Logo"/> 
-                    <div className="logo__text">Date, Location</div>
+                    <div className="logo__text">{date}, {location}</div>
                 </div>
                 <div className="profile header__profile-logo">
                     <div>

@@ -1,3 +1,7 @@
+export const APIkey = "21f89b5fc71f52a8e6dc6c81dc95cd2b";
+export const latitude = 47.6061;
+export const longitude = -122.335167;
+
 export const weatherOptions = [
     { 
         url: require("../images/day/sunny.svg").default, 

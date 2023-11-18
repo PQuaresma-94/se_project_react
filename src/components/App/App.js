@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 import Main from '../Main/Main'
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import ItemModal from '../ItemModal/ItemModal';
-import { getForcastWeather, parseWeatherData } from '../../utils/WeatherApi';
+import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
 
 import './App.css';
@@ -13,6 +13,9 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState("");
   const [weatherTemp, setWeatherTemp] = useState(0);
+  const [city, setCity] = useState("");
+
+  const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
   const handleCreateModal = () => {
     setActiveModal("create")
@@ -28,15 +31,22 @@ function App() {
   }
 
   useEffect(() => {
-    getForcastWeather().then((data) => {
-      const temp = parseWeatherData(data);
-      setWeatherTemp(temp);
-    })
+    getForcastWeather()
+      .then((data) => {
+        const location = locationData(data);
+        const temp = parseWeatherData(data);
+        setCity(location);
+        setWeatherTemp(temp);
+      })
+      .catch(console.error)
   }, []);
+
 
   return (
     <div>
       <Header 
+        date={currentDate}
+        location={city}
         onCreateModal={handleCreateModal}
       />
       <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
