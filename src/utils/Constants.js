@@ -1,6 +1,6 @@
 export const APIkey = "21f89b5fc71f52a8e6dc6c81dc95cd2b";
-export const latitude = 47.6061;
-export const longitude = -122.335167;
+export const latitude = -22.9068;
+export const longitude = -43.1729;
 
 export const weatherOptions = [
     { 
