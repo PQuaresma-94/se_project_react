@@ -24,6 +24,32 @@ function App() {
   const handleCloseModal = () => {
     setActiveModal("")
   }
+  
+  useEffect(() => {
+    const handleEscapeKeyPress = (event) => {
+      if (event.key === 'Escape') {
+        handleCloseModal();
+      }
+    }
+
+  const handleOverlayClick = (event) => {
+      if (event.target.classList.contains('modal')) {
+        handleCloseModal();
+      }
+    }
+
+    if (activeModal === 'create' || activeModal === 'preview') {
+      document.addEventListener('keydown', handleEscapeKeyPress);
+      document.addEventListener('mousedown', handleOverlayClick);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyPress);
+      document.removeEventListener('mousedown', handleOverlayClick);
+    };
+  }, [activeModal, handleCloseModal]);
+
+
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview")
