@@ -35,4 +35,4 @@ The idea of the application is pretty simple - we make a call to an API, which t
 
 ## GitHub Page
 
-To be added
+- [GitHub Pages](https://pquaresma-94.github.io/se_project_react)
