@@ -38,7 +38,7 @@ function App() {
       }
     }
 
-    if (activeModal === 'create' || activeModal === 'preview') {
+    if (activeModal) {
       document.addEventListener('keydown', handleEscapeKeyPress);
       document.addEventListener('mousedown', handleOverlayClick);
     }
@@ -83,8 +83,8 @@ function App() {
       >
         <div className="form">
           <div>
-            <p className="form__title">Name</p>
             <label className="form__label">
+              <p className="form__title">Name</p>
               <input
                 type="text"
                 className="form__input"
@@ -97,8 +97,8 @@ function App() {
             </label>
           </div>
           <div>
-            <p className="form__title">Image</p>
             <label className="form__label">
+              <p className="form__title">Image</p>
               <input
                 type="url"
                 className="form__input"
@@ -112,19 +112,17 @@ function App() {
           </div>
           <div>
             <p className="form__title">Select the weather type:</p>
-            <div className="form__radio-buttons">
-              <div className="form__radio-button">
-                <input type="radio" name="weatherType" id="hot" value="hot"></input>
-                <label>Hot</label>
-              </div>
-              <div className="form__radio-button">
-                <input type="radio" name="weatherType" id="warm" value="warm"></input>
-                <label> Warm</label>
-              </div>
-              <div className="form__radio-button">
-                <input type="radio" name="weatherType" id="cold" value="cold"></input>
-                <label> Cold</label>
-              </div>
+            <div className="form__radio-button">
+              <input type="radio" id="hot" name="weatherType" value="hot" />
+              <label htmlFor="hot">Hot</label>
+            </div>
+            <div className="form__radio-button">
+              <input type="radio" id="warm" name="weatherType" value="warm" />
+              <label htmlFor="warm">Warm</label>
+            </div>
+            <div className="form__radio-button">
+              <input type="radio" id="cold" name="weatherType" value="cold" />
+              <label htmlFor="cold">Cold</label>
             </div>
           </div>
         </div>

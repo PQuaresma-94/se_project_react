@@ -21,7 +21,6 @@ const Main = ({weatherTemp, onSelectCard}) => {
     });
 
     return (
-        <div>
             <main className="main">
                 <WeatherCard day={true} type="snow" weatherTemp={weatherTemp} />
                 <section className="cards" id="card-section">
@@ -33,7 +32,6 @@ const Main = ({weatherTemp, onSelectCard}) => {
                     </div>
                 </section>
             </main>
-        </div>
     );
 };
 
