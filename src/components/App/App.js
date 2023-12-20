@@ -14,6 +14,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState("");
   const [weatherTemp, setWeatherTemp] = useState(0);
   const [city, setCity] = useState("");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
 
   const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
