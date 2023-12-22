@@ -11,8 +11,11 @@ const ItemModal = ({
                 <button className="modal__close-button modal__close-preview-button" type="button" onClick={onClose}/>
                 <img className="modal__image" src={selectedCard.link} alt={selectedCard.name} />
                  <div className="modal__description">
-                    <div>{selectedCard.name}</div>
-                    <div>Weather: {selectedCard.weather}</div>
+                     <div className="modal__item-info">
+                        <div>{selectedCard.name}</div>
+                        <div>Weather: {selectedCard.weather}</div>
+                    </div>
+                    <button className="modal__delete-button">Delete item</button>
                 </div>
             </div>
         </div>

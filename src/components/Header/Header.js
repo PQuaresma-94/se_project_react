@@ -6,11 +6,12 @@ import { useState } from 'react';
 
 
 const Header = ({ date, location, onCreateModal}) => {
-    const [value, setValue] = useState(false);
+    const [temperatureUnit, handleToggleSwitchChange] = useState("C");
 
-    const handleToggle = () => {
-        setValue(!value);
-        console.log('Toggled! New value:', !value);
+    const handleChange = (e) => {
+        if( temperatureUnit === "C" ) handleToggleSwitchChange("F");
+        if( temperatureUnit === "F" ) handleToggleSwitchChange("C");
+        console.log('Toggled! New value:', temperatureUnit);
       };
 
     return (
@@ -21,8 +22,8 @@ const Header = ({ date, location, onCreateModal}) => {
                 </div>
                 <div className="profile header__profile-logo">
                     <ToggleSwitch 
-                        isOn={value}
-                        handleToggle={handleToggle}
+                        temperatureUnit={temperatureUnit}
+                        handleToggle={handleChange}
                     />
                     <div>
                         <button className="profile__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
