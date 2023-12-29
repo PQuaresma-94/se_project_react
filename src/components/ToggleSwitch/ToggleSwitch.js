@@ -4,10 +4,7 @@ import './ToggleSwitch.css';
 const ToggleSwitch = ({temperatureUnit, handleToggle}) => {
   return (
     <div className="toggle-switch">
-      <label
-        className="toggle-switch__label"
-        htmlFor={`react-switch-new`}
-      >
+      <label className="toggle-switch__label">
         <input
             checked={temperatureUnit}
             onChange={handleToggle}

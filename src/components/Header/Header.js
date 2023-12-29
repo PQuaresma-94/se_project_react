@@ -11,7 +11,7 @@ const Header = ({ date, location, onCreateModal}) => {
     const handleChange = (e) => {
         if( temperatureUnit === "C" ) handleToggleSwitchChange("F");
         if( temperatureUnit === "F" ) handleToggleSwitchChange("C");
-        console.log('Toggled! New value:', temperatureUnit);
+        console.log('Toggled! Old value:', temperatureUnit);
       };
 
     return (
