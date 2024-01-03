@@ -6,6 +6,7 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import ItemModal from '../ItemModal/ItemModal';
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
+import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
 
 import './App.css';
 
@@ -50,11 +51,14 @@ function App() {
     };
   }, [activeModal, handleCloseModal]);
 
-
-
   const handleSelectedCard = (card) => {
     setActiveModal("preview")
     setSelectedCard(card)
+  }
+
+  const handleToggleSwitchChange = () => {
+    if( currentTemperatureUnit === "C" ) setCurrentTemperatureUnit("F");
+    if( currentTemperatureUnit === "F" ) setCurrentTemperatureUnit("C");
   }
 
   useEffect(() => {
@@ -68,9 +72,9 @@ function App() {
       .catch(console.error)
   }, []);
 
-
   return (
     <div>
+      <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}} >
       <Header 
         date={currentDate}
         location={city}
@@ -133,6 +137,7 @@ function App() {
        selectedCard={selectedCard} 
        onClose={handleCloseModal} />
        )}
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }
