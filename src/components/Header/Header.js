@@ -14,13 +14,13 @@ const Header = ({ date, location, onCreateModal}) => {
                     <img className="logo__image" src={LogoImage} alt="Logo"/> 
                     <div className="logo__text">{date}, {location}</div>
                 </div>
-                <div className="profile header__profile-logo">
+                <div className="header__profile-logo">
                     <ToggleSwitch/>
                     <div>
-                        <button className="profile__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
+                        <button className="header__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
                     </div>
-                    <p className="profile__name">Terrence Tegegne</p>
-                    <img className="profile__avatar" src={AvatarImage} alt="Avatar"/>
+                    <p className="header__profile-name">Terrence Tegegne</p>
+                    <img className="header__profile-avatar" src={AvatarImage} alt="Avatar"/>
                 </div>
             </header>
     );

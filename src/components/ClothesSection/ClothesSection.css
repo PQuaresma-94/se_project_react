@@ -1,0 +1,22 @@
+.clothes__header {
+  padding-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.clothes__items {
+  width: calc((328px * 3) + 32px);
+  padding-top: 20px;
+  display: flex;
+  gap: 20px 16px;
+  flex-wrap: wrap;
+}
+
+.clothes__add-button {
+  background-color: transparent;
+  border: none;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.6);
+}

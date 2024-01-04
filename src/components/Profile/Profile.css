@@ -1,0 +1,12 @@
+.profile {
+  display: flex;
+  width: 1360px;
+  margin: auto;
+  padding: 47px 40px 0 40px;
+  color: #000;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

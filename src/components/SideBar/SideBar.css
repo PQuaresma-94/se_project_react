@@ -1,0 +1,11 @@
+.profile__info {
+  display: flex;
+  width: calc(1360px - 1016px);
+  gap: 16px;
+}
+
+.profile__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 56px;
+}

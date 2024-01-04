@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import Main from '../Main/Main'
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import ItemModal from '../ItemModal/ItemModal';
+import Profile from '../Profile/Profile';
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
@@ -80,6 +81,7 @@ function App() {
         location={city}
         onCreateModal={handleCreateModal}
       />
+      <Profile/>
       <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
       <Footer/>
       {activeModal === "create" && (<ModalWithForm 

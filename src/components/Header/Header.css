@@ -26,19 +26,19 @@
   align-items: center;
 }
 
-.profile__add-button {
+.header__add-button {
   background-color: transparent;
   border: none;
   font-family: "Cabinet Grotesk";
   font-weight: 700;
 }
 
-.profile__add-button:hover {
+.header__add-button:hover {
   color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
 
-.profile__avatar {
+.header__profile-avatar {
   width: 40px;
   height: 40px;
   border-radius: 40px;
