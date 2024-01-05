@@ -8,6 +8,7 @@ import Profile from '../Profile/Profile';
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
+import { BrowserRouter, Switch , Route } from 'react-router-dom/cjs/react-router-dom.min';
 
 import './App.css';
 
@@ -74,6 +75,7 @@ function App() {
   }, []);
 
   return (
+    <BrowserRouter>
     <div>
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}} >
       <Header 
@@ -81,8 +83,14 @@ function App() {
         location={city}
         onCreateModal={handleCreateModal}
       />
-      <Profile/>
-      <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
+      <Switch>
+        <Route exact path="/">
+          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
+        </Route>
+        <Route path="/profile">
+          <Profile/>
+        </Route>
+      </Switch>
       <Footer/>
       {activeModal === "create" && (<ModalWithForm 
         title="New garment"
@@ -141,6 +149,7 @@ function App() {
        )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
+    </BrowserRouter>
   );
 }
 

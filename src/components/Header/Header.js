@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
 import LogoImage from '../../images/Logo.svg';
 import AvatarImage from '../../images/Avatar.svg';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import "./Header.css";
+
 
 
 
@@ -11,7 +13,9 @@ const Header = ({ date, location, onCreateModal}) => {
     return (
             <header className="header">
                 <div className="logo header__logo">
-                    <img className="logo__image" src={LogoImage} alt="Logo"/> 
+                    <Link to="/" className="logo__link">
+                        <img className="logo__image" src={LogoImage} alt="Logo"/> 
+                    </Link>
                     <div className="logo__text">{date}, {location}</div>
                 </div>
                 <div className="header__profile-logo">
@@ -19,7 +23,9 @@ const Header = ({ date, location, onCreateModal}) => {
                     <div>
                         <button className="header__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
                     </div>
-                    <p className="header__profile-name">Terrence Tegegne</p>
+                    <Link to="/profile" className="header__profile-link">
+                        <div className="header__profile-name">Terrence Tegegne</div>
+                    </Link>
                     <img className="header__profile-avatar" src={AvatarImage} alt="Avatar"/>
                 </div>
             </header>

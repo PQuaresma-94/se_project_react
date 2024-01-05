@@ -38,6 +38,21 @@
   cursor: pointer;
 }
 
+.header__profile-link:link {
+  text-decoration: none;
+  color: #000;
+}
+
+.header__profile-link:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+.header__profile-link:hover {
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
 .header__profile-avatar {
   width: 40px;
   height: 40px;
