@@ -11,6 +11,7 @@ import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUn
 import { BrowserRouter, Switch , Route } from 'react-router-dom/cjs/react-router-dom.min';
 
 import './App.css';
+import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
 
   const handleCreateModal = () => {
     setActiveModal("create")
+  }
+
+  const handleDeleteModal = () => {
+    setActiveModal("delete")
   }
 
   const handleCloseModal = () => {
@@ -61,10 +66,15 @@ function App() {
   const handleAddItemSubmit = () => {
     // Still to do: setClothingItems([item, ...clothingItems]);
   }
-  
+
   const handleSelectedCard = (card) => {
     setActiveModal("preview")
     setSelectedCard(card)
+  }
+
+  const handleDeleteItem = () => {
+    console.log("The item has been deleted")
+    handleCloseModal();
   }
 
   const handleToggleSwitchChange = () => {
@@ -106,7 +116,11 @@ function App() {
         )}
        {activeModal === "preview" && (<ItemModal 
        selectedCard={selectedCard} 
-       onClose={handleCloseModal} />
+       onClose={handleCloseModal}
+       onDelete={handleDeleteModal} />
+       )}
+       {activeModal === "delete" && ( 
+       <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={handleDeleteItem} />
        )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
