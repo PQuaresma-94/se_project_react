@@ -20,3 +20,7 @@
   padding: 0;
   color: rgba(0, 0, 0, 0.6);
 }
+
+.clothes__add-button:hover {
+  cursor: pointer;
+}
