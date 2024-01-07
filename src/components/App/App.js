@@ -9,7 +9,7 @@ import { getForcastWeather, parseWeatherData, locationData } from '../../utils/W
 import { useState, useEffect } from 'react';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
 import { BrowserRouter, Switch , Route } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { getItems } from '../../utils/api';
 import './App.css';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 
@@ -20,6 +20,7 @@ function App() {
   const [weatherTemp, setWeatherTemp] = useState(0);
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
+  const [clothingItems, setClothingItems] = useState([]);
 
   const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
@@ -92,6 +93,14 @@ function App() {
       })
       .catch(console.error)
   }, []);
+  
+  useEffect(() => {
+    getItems()
+      .then((items) => {
+        setClothingItems(items)
+      })
+      .catch(console.error)
+}, []);
 
   return (
     <BrowserRouter>
@@ -104,10 +113,10 @@ function App() {
       />
       <Switch>
         <Route exact path="/">
-          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
+          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems} />
         </Route>
         <Route path="/profile">
-          <Profile onSelectCard={handleSelectedCard} onCreateModal={handleCreateModal} />
+          <Profile onSelectCard={handleSelectedCard} onCreateModal={handleCreateModal} clothingItems={clothingItems} />
         </Route>
       </Switch>
       <Footer/>

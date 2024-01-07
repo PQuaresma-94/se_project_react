@@ -1,9 +1,8 @@
 import React from 'react';
 import ItemCard from '../ItemCard/ItemCard';
-import {defaultClothingItems} from "../../utils/Constants"
 import './ClothesSection.css';
 
-const ClothesSection = ({ onCreateModal , onSelectCard}) => {
+const ClothesSection = ({ onCreateModal , onSelectCard, clothingItems}) => {
 
     return (
         <section className="clothes" id="clothes-section">
@@ -12,7 +11,7 @@ const ClothesSection = ({ onCreateModal , onSelectCard}) => {
                 <button className="clothes__add-button" type="text" onClick={onCreateModal}>+ Add new</button>
             </div>
             <div className="clothes__items">
-                {defaultClothingItems.map((item) => (
+                {clothingItems.map((item) => (
                     <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
                 ))}
             </div>
