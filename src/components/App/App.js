@@ -63,7 +63,6 @@ function App() {
     postItem({ name: data.name, type: data.weatherType, link: data.link })
         .then((addedItem) => {
             setClothingItems(prevItems => [...prevItems, addedItem]); // Add the new item to clothingItems state
-            console.log("Item added successfully");
         })
         .catch(error => {
             console.error("Error adding item:", error);
@@ -79,7 +78,6 @@ function App() {
     deleteItem(item._id)
         .then(() => {
             setClothingItems(prevItems => prevItems.filter(clothingItem => clothingItem._id !== item._id));
-            console.log("The item has been deleted");
             handleCloseModal();
         })
         .catch(error => {
