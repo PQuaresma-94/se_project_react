@@ -72,8 +72,6 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen}) => {
                 className="form__input"
                 name="link"
                 placeholder="Image URL"
-                minLength="1"
-                maxLength="30"
                 required
                 value={link}
                 onChange={handleUrlChange}

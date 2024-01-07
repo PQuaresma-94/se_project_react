@@ -9,10 +9,9 @@ import { getForcastWeather, parseWeatherData, locationData } from '../../utils/W
 import { useState, useEffect } from 'react';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
 import { BrowserRouter, Switch , Route } from 'react-router-dom/cjs/react-router-dom.min';
-import { getItems } from '../../utils/api';
+import { getItems, postItem, deleteItem } from '../../utils/api';
 import './App.css';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
-
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -60,22 +59,32 @@ function App() {
     };
   }, [activeModal, handleCloseModal]);
 
-  const onAddItem = (values) => {
-    console.log(values);
-  }
-
-  const handleAddItemSubmit = () => {
-    // Still to do: setClothingItems([item, ...clothingItems]);
-  }
+  const handleAddItemSubmit = (data) => {
+    postItem({ name: data.name, link: data.link, weatherType: data.weatherType })
+        .then((addedItem) => {
+            setClothingItems(prevItems => [...prevItems, addedItem]); // Add the new item to clothingItems state
+            console.log("Item added successfully");
+        })
+        .catch(error => {
+            console.error("Error adding item:", error);
+        });
+};
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview")
     setSelectedCard(card)
   }
 
-  const handleDeleteItem = () => {
-    console.log("The item has been deleted")
-    handleCloseModal();
+  const handleDeleteItem = (item) => {
+    deleteItem(item._id)
+        .then(() => {
+            setClothingItems(prevItems => prevItems.filter(clothingItem => clothingItem._id !== item._id));
+            console.log("The item has been deleted");
+            handleCloseModal();
+        })
+        .catch(error => {
+            console.error("Error deleting item:", error);
+        });
   }
 
   const handleToggleSwitchChange = () => {
@@ -121,7 +130,7 @@ function App() {
       </Switch>
       <Footer/>
       {activeModal === "create" && (
-        <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={onAddItem} />
+        <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={handleAddItemSubmit} />
         )}
        {activeModal === "preview" && (<ItemModal 
        selectedCard={selectedCard} 
@@ -129,7 +138,7 @@ function App() {
        onDelete={handleDeleteModal} />
        )}
        {activeModal === "delete" && ( 
-       <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={handleDeleteItem} />
+       <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={() => handleDeleteItem(selectedCard)}  />
        )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
