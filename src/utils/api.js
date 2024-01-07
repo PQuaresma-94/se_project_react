@@ -11,14 +11,13 @@ export const getItems = () => {
         });
 };
 
-export const postItem = ({ name, link, weatherType }) => {
+export const postItem = (item) => {
     return fetch(`${baseUrl}/items`, {
         method: 'POST',
-        body: JSON.stringify({
-            name: name,
-            type: weatherType,
-            link: link
-        })
+        body: JSON.stringify(item),
+        headers: {
+          'Content-Type': 'application/json'
+      }
     })
         .then((res) => {
             if (res.ok) {

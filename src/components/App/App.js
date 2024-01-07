@@ -60,7 +60,7 @@ function App() {
   }, [activeModal, handleCloseModal]);
 
   const handleAddItemSubmit = (data) => {
-    postItem({ name: data.name, link: data.link, weatherType: data.weatherType })
+    postItem({ name: data.name, type: data.weatherType, link: data.link })
         .then((addedItem) => {
             setClothingItems(prevItems => [...prevItems, addedItem]); // Add the new item to clothingItems state
             console.log("Item added successfully");

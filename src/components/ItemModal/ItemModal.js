@@ -14,7 +14,7 @@ const ItemModal = ({
                  <div className="modal__description">
                      <div className="modal__item-info">
                         <div>{selectedCard.name}</div>
-                        <div>Weather: {selectedCard.weather}</div>
+                        <div>Weather: {selectedCard.type}</div>
                     </div>
                     <button className="modal__delete-button" type="button" onClick={onDelete}>Delete item</button>
                 </div>
