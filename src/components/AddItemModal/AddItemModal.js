@@ -4,23 +4,35 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ handleCloseModal , onAddItem, isOpen}) => {
     const [name, setName] = useState("")
-    const handleNameChange = (e) => {
-        console.log(e.target.validity.valid)
-        setName(e.target.value)
-    }
-
-    const [link, setUrl] = useState("")
-    const handleUrlChange = (e) => {
-        console.log(e.target.validity.valid)
-        setUrl(e.target.value)
-    }
-
     const [weatherType, setWeatherType] = useState("")
-    const handleWeatherType = (e) => {
-        console.log(e.target.validity.valid)
-        setWeatherType(e.target.value)
+    const [link, setUrl] = useState("")
+  
+    const [isNameValid, setIsNameValid] = useState(false)
+    const [isWeatherTypeValid, setIsWeatherTypeValid] = useState(false)
+    const [isUrlValid, setIsUrlValid] = useState(false)
+  
+    const [isButtonEnabled, setIsButtonEnabled] = useState(false)
+  
+    const handleNameChange = (e) => {
+        const isNameValid = e.target.validity.valid;
+        setIsNameValid(isNameValid)
+        setName(e.target.value)
+        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
     }
 
+    const handleUrlChange = (e) => {
+        const isUrlValid = e.target.validity.valid;
+        setIsUrlValid(isUrlValid);
+        setUrl(e.target.value)
+        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
+    }
+
+    const handleWeatherType = (e) => {
+        const isWeatherTypeValid = e.target.validity.valid;
+        setIsWeatherTypeValid(isWeatherTypeValid);
+        setWeatherType(e.target.value)
+        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
+    }
     const handleSubmit = (e) => {
         e.preventDefault()
         onAddItem ({name, link, weatherType})
@@ -33,6 +45,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen}) => {
             onClose={handleCloseModal}
             isOpen={isOpen}
             onSubmit={handleSubmit}
+            isEnable={isButtonEnabled}
         >
         <div className="form">
           <div>
