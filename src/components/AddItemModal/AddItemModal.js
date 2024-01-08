@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -39,9 +39,22 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen}) => {
         handleCloseModal()
     }
 
+    useEffect(() => {
+      if (isOpen) {
+          setName("");
+          setWeatherType("");
+          setUrl("");
+          setIsNameValid(false);
+          setIsWeatherTypeValid(false);
+          setIsUrlValid(false);
+          setIsButtonEnabled(false);
+      }
+  }, [isOpen]);
+
     return (
         <ModalWithForm 
             title="New garment"
+            buttonText = "Add garment"
             onClose={handleCloseModal}
             isOpen={isOpen}
             onSubmit={handleSubmit}
