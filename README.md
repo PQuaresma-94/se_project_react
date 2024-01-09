@@ -23,11 +23,29 @@ The idea of the application is pretty simple - we make a call to an API, which t
 
 ![Add new garment modal](screenshots/AddItemModal.png)
 
-- Open Preview Modal
+- Open Preview Modal with Delete Functionality
 
 ![Open Preview modal](screenshots/ItemCardModal.png)
 
+![Updated Open Preview modal](screenshots/ItemModalWithDeleteFunctionality.png)
+
+- Open Delete Modal
+
+![Open Delete modal](screenshots/DeleteItemModal.png)
+
 - Close modal on Overlay and on Esc Key
+
+- Toggle Switch to change temperature unit
+
+![Fahrenheit](screenshots/TemperatureF.png)
+
+![Celsius](screenshots/TemperatureC.png)
+
+- New Path Added - Profile Section
+
+![Profile Section](screenshots/ProfileSection.png)
+
+Displays user information and all clothes items
 
 ## Links
 
