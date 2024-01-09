@@ -25,7 +25,11 @@ The idea of the application is pretty simple - we make a call to an API, which t
 
 - Open Preview Modal with Delete Functionality
 
+Old Version
+
 ![Open Preview modal](screenshots/ItemCardModal.png)
+
+Updated Version
 
 ![Updated Open Preview modal](screenshots/ItemModalWithDeleteFunctionality.png)
 
