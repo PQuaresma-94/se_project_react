@@ -49,9 +49,13 @@
   gap: 32px;
 }
 
+.modal__buttons {
+  display: flex;
+  gap: 12px;
+}
+
 .modal__add-button {
   height: 36px;
-  width: 124px;
   padding: 8px 16px;
   border-radius: 4px;
   border: none;
@@ -71,6 +75,22 @@
 
 .modal__add-button:hover {
   background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.modal__switch-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.modal__switch-button:hover {
   cursor: pointer;
 }
 

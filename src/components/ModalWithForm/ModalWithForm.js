@@ -2,12 +2,14 @@ import "./ModalWithForm.css";
 
 const ModalWithForm = ({
     children, 
-    buttonText,
+    submitButtonText,
+    switchButtonText,
     title, 
     onClose,
     name,
     isOpen,
     onSubmit,
+    onClick,
     isEnable
 }) => {
     return (
@@ -17,7 +19,12 @@ const ModalWithForm = ({
                 <h3 className="modal__title" >{title}</h3>
                 <form className="modal__form" onSubmit={onSubmit}>
                     {children}
-                    <button className="modal__add-button" type="submit" disabled={!isEnable} >{buttonText}</button>
+                    <div className="modal__buttons">
+                        <button className="modal__add-button" type="submit" disabled={!isEnable} >{submitButtonText}</button>
+                        {switchButtonText && (
+                            <button className="modal__switch-button" type="button" onClick={onClick}>{switchButtonText}</button>
+                        )}
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from "react";
-import "./AddItemModal.css";
+import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
+const RegisterModal = ({ handleCloseModal , onAddItem, isOpen }) => {
     const [name, setName] = useState("")
-    const [weather, setWeather] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+    const [weatherType, setWeatherType] = useState("")
+    const [link, setUrl] = useState("")
   
     const [isNameValid, setIsNameValid] = useState(false)
-    const [isWeatherValid, setIsWeatherValid] = useState(false)
-    const [isImageUrlValid, setIsImageUrlValid] = useState(false)
+    const [isWeatherTypeValid, setIsWeatherTypeValid] = useState(false)
+    const [isUrlValid, setIsUrlValid] = useState(false)
   
     const [isButtonEnabled, setIsButtonEnabled] = useState(false)
   
@@ -17,55 +17,48 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
         const isNameValid = e.target.validity.valid;
         setIsNameValid(isNameValid)
         setName(e.target.value)
-        setIsButtonEnabled(isNameValid && isWeatherValid && isImageUrlValid)
+        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
     }
 
     const handleUrlChange = (e) => {
-        const isImageUrlValid = e.target.validity.valid;
-        setIsImageUrlValid(isImageUrlValid);
-        setImageUrl(e.target.value)
-        setIsButtonEnabled(isNameValid && isWeatherValid && isImageUrlValid)
+        const isUrlValid = e.target.validity.valid;
+        setIsUrlValid(isUrlValid);
+        setUrl(e.target.value)
+        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
     }
 
     const handleWeatherType = (e) => {
-        const isWeatherValid = e.target.validity.valid;
-        setIsWeatherValid(isWeatherValid);
-        setWeather(e.target.value)
-        setIsButtonEnabled(isNameValid && isWeatherValid && isImageUrlValid)
+        const isWeatherTypeValid = e.target.validity.valid;
+        setIsWeatherTypeValid(isWeatherTypeValid);
+        setWeatherType(e.target.value)
+        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        onAddItem ({name, imageUrl, weather})
+        onAddItem ({name, link, weatherType})
         handleCloseModal()
     }
 
     useEffect(() => {
       if (isOpen) {
           setName("");
-          setWeather("");
-          setImageUrl("");
+          setWeatherType("");
+          setUrl("");
           setIsNameValid(false);
-          setIsWeatherValid(false);
-          setIsImageUrlValid(false);
+          setIsWeatherTypeValid(false);
+          setIsUrlValid(false);
           setIsButtonEnabled(false);
       }
   }, [isOpen]);
 
-  const testClickButton = (e) => {
-    e.preventDefault()
-    console.log("test Sucess")
-  }
-
     return (
         <ModalWithForm 
             title="New garment"
-            submitButtonText = "Add garment"
-            switchButtonText = "Test"
-            onClick = {testClickButton}
-            onClose ={handleCloseModal}
-            isOpen ={isOpen}
-            onSubmit ={handleSubmit}
-            isEnable ={isButtonEnabled}
+            buttonText = "Add garment"
+            onClose={handleCloseModal}
+            isOpen={isOpen}
+            onSubmit={handleSubmit}
+            isEnable={isButtonEnabled}
         >
         <div className="form">
           <div>
@@ -93,7 +86,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
                 name="link"
                 placeholder="Image URL"
                 required
-                value={imageUrl}
+                value={link}
                 onChange={handleUrlChange}
               />
             </label>
@@ -106,7 +99,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
                 id="hot" 
                 name="weatherType" 
                 value="hot" 
-                checked={weather === 'hot'}
+                checked={weatherType === 'hot'}
                 onChange={handleWeatherType} 
               />
               <label htmlFor="hot">Hot</label>
@@ -117,7 +110,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
                 id="warm" 
                 name="weatherType" 
                 value="warm"
-                checked={weather === 'warm'}
+                checked={weatherType === 'warm'}
                 onChange={handleWeatherType}
               />
               <label htmlFor="warm">Warm</label>
@@ -128,7 +121,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
                 id="cold" 
                 name="weatherType" 
                 value="cold"
-                checked={weather === 'cold'}
+                checked={weatherType === 'cold'}
                 onChange={handleWeatherType}
               />
               <label htmlFor="cold">Cold</label>
@@ -139,4 +132,4 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
     );
 }
 
-export default AddItemModal
+export default RegisterModal 
