@@ -15,12 +15,12 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
         const isEmailValid = e.target.validity.valid;
         setIsEmailValid(isEmailValid)
         setEmail(e.target.value)
-        setIsButtonEnabled(isEmailValid && isUrlValid)
+        setIsButtonEnabled(isEmailValid && isPasswordValid)
     }
 
-    const handleUrlChange = (e) => {
-        const isUrlValid = e.target.validity.valid;
-        setIsPasswordValid(isUrlValid);
+    const handlePasswordChange = (e) => {
+        const isPasswordValid = e.target.validity.valid;
+        setIsPasswordValid(isPasswordValid);
         setPassword(e.target.value)
         setIsButtonEnabled(isEmailValid && isPasswordValid)
     }
@@ -30,6 +30,9 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
         onAddItem ({email, password})
         handleCloseModal()
     }
+    const handleSwitch = (e) => {
+        console.log(e)
+    } 
 
     useEffect(() => {
       if (isOpen) {
@@ -49,6 +52,8 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
             isOpen={isOpen}
             onSubmit={handleSubmit}
             isEnable={isButtonEnabled}
+            switchButtonText = "Test"
+            onClick = {handleSwitch}
         >
         <div className="form">
           <div>
@@ -75,7 +80,7 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
                 placeholder="Password"
                 required
                 value={password}
-                onChange={handleUrlChange}
+                onChange={handlePasswordChange}
               />
             </label>
           </div>

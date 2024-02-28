@@ -51,17 +51,10 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
       }
   }, [isOpen]);
 
-  const testClickButton = (e) => {
-    e.preventDefault()
-    console.log("test Sucess")
-  }
-
     return (
         <ModalWithForm 
             title="New garment"
             submitButtonText = "Add garment"
-            switchButtonText = "Test"
-            onClick = {testClickButton}
             onClose ={handleCloseModal}
             isOpen ={isOpen}
             onSubmit ={handleSubmit}

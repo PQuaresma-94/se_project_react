@@ -2,75 +2,119 @@ import React, {useState, useEffect} from "react";
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ handleCloseModal , onAddItem, isOpen }) => {
+const RegisterModal = ({ }) => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [name, setName] = useState("")
-    const [weatherType, setWeatherType] = useState("")
-    const [link, setUrl] = useState("")
+    const [avatar, setAvatar] = useState("")
   
+    const [isEmailValid, setIsEmailValid] = useState(false)
+    const [isPasswordValid, setIsPasswordValid] = useState(false)
     const [isNameValid, setIsNameValid] = useState(false)
-    const [isWeatherTypeValid, setIsWeatherTypeValid] = useState(false)
-    const [isUrlValid, setIsUrlValid] = useState(false)
-  
+    const [isAvatarValid, setIsAvatarValid] = useState(false)
+    
     const [isButtonEnabled, setIsButtonEnabled] = useState(false)
   
+    const handleEmailChange = (e) => {
+        const isEmailValid = e.target.validity.valid;
+        setIsEmailValid(isEmailValid)
+        setEmail(e.target.value)
+        setIsButtonEnabled(isEmailValid && isPasswordValid && isNameValid && isAvatarValid)
+    }
+
+    const handlePasswordChange = (e) => {
+        const isPasswordValid = e.target.validity.valid;
+        setIsPasswordValid(isPasswordValid);
+        setPassword(e.target.value)
+        setIsButtonEnabled(isEmailValid && isPasswordValid && isNameValid && isAvatarValid)
+    }
+
     const handleNameChange = (e) => {
         const isNameValid = e.target.validity.valid;
-        setIsNameValid(isNameValid)
+        setIsNameValid(isNameValid);
         setName(e.target.value)
-        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
+        setIsButtonEnabled(isEmailValid && isPasswordValid && isNameValid && isAvatarValid)
     }
 
-    const handleUrlChange = (e) => {
-        const isUrlValid = e.target.validity.valid;
-        setIsUrlValid(isUrlValid);
-        setUrl(e.target.value)
-        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
+    const handleAvatarChange = (e) => {
+        const isAvatarValid = e.target.validity.valid;
+        setIsAvatarValid(isAvatarValid);
+        setAvatar(e.target.value)
+        setIsButtonEnabled(isEmailValid && isPasswordValid && isNameValid && isAvatarValid)
     }
 
-    const handleWeatherType = (e) => {
-        const isWeatherTypeValid = e.target.validity.valid;
-        setIsWeatherTypeValid(isWeatherTypeValid);
-        setWeatherType(e.target.value)
-        setIsButtonEnabled(isNameValid && isWeatherTypeValid && isUrlValid)
-    }
     const handleSubmit = (e) => {
         e.preventDefault()
-        onAddItem ({name, link, weatherType})
+        // Change func to add user to backend
+        console.log({ email, password, name, avatar })
         handleCloseModal()
     }
+    const handleSwitch = (e) => {
+        console.log(e)
+    } 
 
     useEffect(() => {
       if (isOpen) {
+          setEmail("");
+          setPassword("");
           setName("");
-          setWeatherType("");
-          setUrl("");
+          setAvatar("");
+          setIsEmailValid(false);
+          setIsPasswordValid(false);
           setIsNameValid(false);
-          setIsWeatherTypeValid(false);
-          setIsUrlValid(false);
+          setIsAvatarValid(false);
           setIsButtonEnabled(false);
       }
   }, [isOpen]);
 
     return (
         <ModalWithForm 
-            title="New garment"
-            buttonText = "Add garment"
+            title="Sign Up"
+            buttonText = "Sign Up"
             onClose={handleCloseModal}
             isOpen={isOpen}
             onSubmit={handleSubmit}
             isEnable={isButtonEnabled}
+            switchButtonText = "or Log In"
+            onClick = {handleSwitch}
         >
         <div className="form">
           <div>
             <label className="form__label">
-              <p className="form__title">Name</p>
+              <p className="form__title">Email*</p>
+              <input
+                type="email"
+                className="form__input"
+                name="email"
+                placeholder="Email"
+                required
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label className="form__label">
+              <p className="form__title">Password*</p>
+              <input
+                type="text"
+                className="form__input"
+                name="password"
+                placeholder="Password"
+                required
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label className="form__label">
+              <p className="form__title">Name*</p>
               <input
                 type="text"
                 className="form__input"
                 name="name"
                 placeholder="Name"
-                minLength="1"
-                maxLength="30"
                 required
                 value={name}
                 onChange={handleNameChange}
@@ -79,53 +123,17 @@ const RegisterModal = ({ handleCloseModal , onAddItem, isOpen }) => {
           </div>
           <div>
             <label className="form__label">
-              <p className="form__title">Image</p>
+              <p className="form__title">Avatar URL*</p>
               <input
                 type="url"
                 className="form__input"
-                name="link"
-                placeholder="Image URL"
+                name="avatar"
+                placeholder="Avatar URL"
                 required
-                value={link}
-                onChange={handleUrlChange}
+                value={avatar}
+                onChange={handleAvatarChange}
               />
             </label>
-          </div>
-          <div>
-            <p className="form__title">Select the weather type:</p>
-            <div className="form__radio-button">
-              <input 
-                type="radio" 
-                id="hot" 
-                name="weatherType" 
-                value="hot" 
-                checked={weatherType === 'hot'}
-                onChange={handleWeatherType} 
-              />
-              <label htmlFor="hot">Hot</label>
-            </div>
-            <div className="form__radio-button">
-              <input 
-                type="radio" 
-                id="warm" 
-                name="weatherType" 
-                value="warm"
-                checked={weatherType === 'warm'}
-                onChange={handleWeatherType}
-              />
-              <label htmlFor="warm">Warm</label>
-            </div>
-            <div className="form__radio-button">
-              <input 
-                type="radio" 
-                id="cold" 
-                name="weatherType" 
-                value="cold"
-                checked={weatherType === 'cold'}
-                onChange={handleWeatherType}
-              />
-              <label htmlFor="cold">Cold</label>
-            </div>
           </div>
         </div>
         </ModalWithForm>
