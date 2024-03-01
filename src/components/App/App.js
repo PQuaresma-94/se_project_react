@@ -134,7 +134,7 @@ function App() {
         date={currentDate}
         location={city}
         onCreateModal={handleCreateModal}
-        isLoggedIn={true} 
+        isLoggedIn={false} 
         onRegisterModal={handleRegisterModal} 
         onLoginModal={handleLoginModal}
       />

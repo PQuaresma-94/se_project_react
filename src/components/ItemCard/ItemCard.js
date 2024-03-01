@@ -4,7 +4,10 @@ const ItemCard = ({ item, onSelectCard }) => {
     return (
         <div className="card">
             <img className="card__image" src={item.imageUrl} alt={item.name} onClick={() => onSelectCard(item)} />
-            <div className="card__name">{item.name}</div>
+            <div className="card__header">
+                <div className="card__title">{item.name}</div>
+                <div className="card__like-button" onClick={() => console.log("this card has been liked")}></div>
+            </div>
         </div>
     );
 };
