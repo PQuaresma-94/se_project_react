@@ -23,7 +23,7 @@ const Header = ({ date, location, onCreateModal, isLoggedIn, onRegisterModal, on
                     {isLoggedIn ? (
                     <>
                         <div>
-                            <button className="header__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
+                            <button className="header__button" type="text" onClick={onCreateModal}>+ Add clothes</button>
                         </div>
                         <Link to="/profile" className="header__profile-link">
                             <div className="header__profile-name">Terrence Tegegne</div>
@@ -33,10 +33,10 @@ const Header = ({ date, location, onCreateModal, isLoggedIn, onRegisterModal, on
                     ) : (
                     <>
                         <div>
-                            <button className="header__add-button" type="text" onClick={onRegisterModal}>Sign Up</button>
+                            <button className="header__button" type="text" onClick={onRegisterModal}>Sign Up</button>
                         </div>
                         <div>
-                            <button className="header__add-button" type="text" onClick={onLoginModal}>Log In</button>
+                            <button className="header__button" type="text" onClick={onLoginModal}>Log In</button>
                         </div>
                     </>
                     )}
