@@ -2,8 +2,7 @@ import React from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import './ClothesSection.css';
 
-const ClothesSection = ({ onCreateModal , onSelectCard, clothingItems}) => {
-
+const ClothesSection = ({ onCreateModal , onSelectCard, clothingItems }) => {
     return (
         <section className="clothes" id="clothes-section">
             <div className="clothes__header">
