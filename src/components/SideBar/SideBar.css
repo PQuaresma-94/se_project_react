@@ -29,3 +29,8 @@
   font-family: "Cabinet Grotesk";
   font-weight: 700;
 }
+
+.profile__button:hover {
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}

@@ -7,6 +7,7 @@ import Profile from '../Profile/Profile';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
+import EditProfileModal from '../EditProfileModal/EditProfileModal';
 import ProtecteRoute from "../ProtectedRoute/ProtectedRoute";
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
@@ -44,6 +45,10 @@ function App() {
     setActiveModal("login")
   }
 
+  const handleEditProfileModal = () => {
+    setActiveModal("edit-profile")
+  }
+  
   const handleCloseModal = () => {
     setActiveModal("")
   }
@@ -143,7 +148,7 @@ const isLoggedIn = (true)
       />
       <Switch>
         <Route exact path="/">
-          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems}/>
+          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems} />
         </Route>
         <ProtecteRoute 
           path="/profile" 
@@ -151,7 +156,8 @@ const isLoggedIn = (true)
           component={Profile} 
           onSelectCard={handleSelectedCard} 
           onCreateModal={handleCreateModal} 
-          clothingItems={clothingItems} >
+          clothingItems={clothingItems} 
+          onEditProfileModal={handleEditProfileModal} >
         </ProtecteRoute>
       </Switch>
       <Footer/>
@@ -164,6 +170,9 @@ const isLoggedIn = (true)
       {activeModal === "create" && (
         <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={handleAddItemSubmit} />
       )}
+      {activeModal === "edit-profile" && (
+        <EditProfileModal handleCloseModal={handleCloseModal} isOpen={activeModal === "edit-profile"} onAddItem={handleAddItemSubmit} />
+      )}
       {activeModal === "preview" && (
         <ItemModal 
           selectedCard={selectedCard} 
@@ -173,7 +182,6 @@ const isLoggedIn = (true)
       {activeModal === "delete" && ( 
         <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={() => handleDeleteItem(selectedCard)}  />
       )}
-
       </CurrentTemperatureUnitContext.Provider>
     </div>
     </BrowserRouter>
