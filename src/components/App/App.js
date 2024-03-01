@@ -7,6 +7,7 @@ import Profile from '../Profile/Profile';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
+import ProtecteRoute from "../ProtectedRoute/ProtectedRoute";
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
@@ -126,6 +127,8 @@ function App() {
       .catch(console.error)
 }, []);
 
+const isLoggedIn = (false)
+
   return (
     <BrowserRouter>
     <div>
@@ -134,7 +137,7 @@ function App() {
         date={currentDate}
         location={city}
         onCreateModal={handleCreateModal}
-        isLoggedIn={false} 
+        isLoggedIn={isLoggedIn} 
         onRegisterModal={handleRegisterModal} 
         onLoginModal={handleLoginModal}
       />
@@ -142,9 +145,14 @@ function App() {
         <Route exact path="/">
           <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems}/>
         </Route>
-        <Route path="/profile">
-          <Profile onSelectCard={handleSelectedCard} onCreateModal={handleCreateModal} clothingItems={clothingItems} />
-        </Route>
+        <ProtecteRoute 
+          path="/profile" 
+          isLoggedIn={isLoggedIn} 
+          component={Profile} 
+          onSelectCard={handleSelectedCard} 
+          onCreateModal={handleCreateModal} 
+          clothingItems={clothingItems} >
+        </ProtecteRoute>
       </Switch>
       <Footer/>
       {activeModal === "login" && ( 

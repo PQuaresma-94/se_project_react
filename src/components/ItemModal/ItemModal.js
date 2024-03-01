@@ -6,7 +6,6 @@ const ItemModal = ({
     name, 
     onDelete
 }) => {
-    console.log(selectedCard)
     return (
         <div className={`modal modal_type_${name}`}>
             <div className="modal__container modal__container-item">
