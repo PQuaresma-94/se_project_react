@@ -47,12 +47,12 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
     return (
         <ModalWithForm 
             title="Log In"
-            buttonText = "Log In"
+            submitButtonText = "Log In"
             onClose={handleCloseModal}
             isOpen={isOpen}
             onSubmit={handleSubmit}
             isEnable={isButtonEnabled}
-            switchButtonText = "Test"
+            switchButtonText = "or Sign Up"
             onClick = {handleSwitch}
         >
         <div className="form">

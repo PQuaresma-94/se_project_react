@@ -7,7 +7,7 @@ import "./Header.css";
 
 
 
-const Header = ({ date, location, onCreateModal}) => {
+const Header = ({ date, location, onCreateModal, isLoggedIn, onRegisterModal, onLoginModal }) => {
     
 
     return (
@@ -20,13 +20,26 @@ const Header = ({ date, location, onCreateModal}) => {
                 </div>
                 <div className="header__profile-logo">
                     <ToggleSwitch/>
-                    <div>
-                        <button className="header__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
-                    </div>
-                    <Link to="/profile" className="header__profile-link">
-                        <div className="header__profile-name">Terrence Tegegne</div>
-                    </Link>
-                    <img className="header__profile-avatar" src={AvatarImage} alt="Avatar"/>
+                    {isLoggedIn ? (
+                    <>
+                        <div>
+                            <button className="header__add-button" type="text" onClick={onCreateModal}>+ Add clothes</button>
+                        </div>
+                        <Link to="/profile" className="header__profile-link">
+                            <div className="header__profile-name">Terrence Tegegne</div>
+                        </Link>
+                        <img className="header__profile-avatar" src={AvatarImage} alt="Avatar"/>
+                    </>
+                    ) : (
+                    <>
+                        <div>
+                            <button className="header__add-button" type="text" onClick={onRegisterModal}>Sign Up</button>
+                        </div>
+                        <div>
+                            <button className="header__add-button" type="text" onClick={onLoginModal}>Log In</button>
+                        </div>
+                    </>
+                    )}
                 </div>
             </header>
     );

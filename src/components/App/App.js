@@ -5,6 +5,8 @@ import Main from '../Main/Main'
 import ItemModal from '../ItemModal/ItemModal';
 import Profile from '../Profile/Profile';
 import AddItemModal from '../AddItemModal/AddItemModal';
+import LoginModal from '../LoginModal/LoginModal';
+import RegisterModal from '../RegisterModal/RegisterModal';
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
@@ -23,6 +25,8 @@ function App() {
 
   const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
+  // Handle Modal Functions
+
   const handleCreateModal = () => {
     setActiveModal("create")
   }
@@ -31,9 +35,19 @@ function App() {
     setActiveModal("delete")
   }
 
+  const handleRegisterModal = () => {
+    setActiveModal("register")
+  }
+
+  const handleLoginModal = () => {
+    setActiveModal("login")
+  }
+
   const handleCloseModal = () => {
     setActiveModal("")
   }
+
+  // Handle Overlay Functions
   
   useEffect(() => {
     const handleEscapeKeyPress = (event) => {
@@ -58,6 +72,8 @@ function App() {
       document.removeEventListener('mousedown', handleOverlayClick);
     };
   }, [activeModal, handleCloseModal]);
+
+  // Handle Items Functions
 
   const handleAddItemSubmit = (data) => {
     postItem({ name: data.name, type: data.weatherType, link: data.link })
@@ -84,6 +100,8 @@ function App() {
             console.error("Error deleting item:", error);
         });
   }
+
+  // Handle Toogle Switch Changes Funtions
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F"); 
@@ -116,27 +134,38 @@ function App() {
         date={currentDate}
         location={city}
         onCreateModal={handleCreateModal}
+        isLoggedIn={true} 
+        onRegisterModal={handleRegisterModal} 
+        onLoginModal={handleLoginModal}
       />
       <Switch>
         <Route exact path="/">
-          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems} />
+          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems}/>
         </Route>
         <Route path="/profile">
           <Profile onSelectCard={handleSelectedCard} onCreateModal={handleCreateModal} clothingItems={clothingItems} />
         </Route>
       </Switch>
       <Footer/>
+      {activeModal === "login" && ( 
+        <LoginModal handleCloseModal={handleCloseModal} isOpen={activeModal === "login"} onAddItem={handleAddItemSubmit}/>
+      )}
+      {activeModal === "register" && ( 
+        <RegisterModal handleCloseModal={handleCloseModal} isOpen={activeModal === "register"} onAddItem={handleAddItemSubmit}/>
+      )}
       {activeModal === "create" && (
         <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={handleAddItemSubmit} />
-        )}
-       {activeModal === "preview" && (<ItemModal 
-       selectedCard={selectedCard} 
-       onClose={handleCloseModal}
-       onDelete={handleDeleteModal} />
-       )}
-       {activeModal === "delete" && ( 
-       <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={() => handleDeleteItem(selectedCard)}  />
-       )}
+      )}
+      {activeModal === "preview" && (
+        <ItemModal 
+          selectedCard={selectedCard} 
+          onClose={handleCloseModal}
+          onDelete={handleDeleteModal} />
+      )}
+      {activeModal === "delete" && ( 
+        <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={() => handleDeleteItem(selectedCard)}  />
+      )}
+
       </CurrentTemperatureUnitContext.Provider>
     </div>
     </BrowserRouter>
