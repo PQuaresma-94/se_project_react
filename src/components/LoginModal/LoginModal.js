@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
+const LoginModal = ({ handleCloseModal , onLogin , isOpen }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
   
@@ -27,7 +27,7 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        onAddItem ({email, password})
+        onLogin ({ email, password })
         handleCloseModal()
     }
     const handleSwitch = (e) => {
@@ -74,7 +74,7 @@ const LoginModal = ({ handleCloseModal , onAddItem, isOpen }) => {
             <label className="form__label">
               <p className="form__title">Password</p>
               <input
-                type="text"
+                type="password"
                 className="form__input"
                 name="password"
                 placeholder="Password"

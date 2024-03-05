@@ -2,20 +2,22 @@
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header'
 import Main from '../Main/Main'
-import ItemModal from '../ItemModal/ItemModal';
 import Profile from '../Profile/Profile';
+import ItemModal from '../ItemModal/ItemModal';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import EditProfileModal from '../EditProfileModal/EditProfileModal';
+import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import ProtecteRoute from "../ProtectedRoute/ProtectedRoute";
 import { getForcastWeather, parseWeatherData, locationData } from '../../utils/WeatherApi';
 import { useState, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
 import { BrowserRouter, Switch , Route } from 'react-router-dom/cjs/react-router-dom.min';
 import { getItems, postItem, deleteItem } from '../../utils/api';
+import { register, authorize, checkToken } from '../../utils/auth';
 import './App.css';
-import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -24,8 +26,39 @@ function App() {
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
+
 
   const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
+
+  // Handle User Functions
+
+  const handleRegister = (data) => {
+    console.log(data)
+    register( data.email, data.password, data.name, data.avatar )
+        .then((res) => {
+            return console.log(res.email, res.password)
+        })
+        .catch(error => {
+            console.error("Error creating a new user:", error);
+        });
+  }
+
+  const handleLogin = (data) => {
+    authorize(data.email, data.password)
+      .then((res) => {
+        checkToken(res)
+        .then((userData) => {
+          console.log(userData)
+          setCurrentUser(userData)
+          setIsLoggedIn(true)
+        })
+      })
+      .catch(error => {
+        console.error("Error Login In:", error);
+    });
+  }
 
   // Handle Modal Functions
 
@@ -82,7 +115,7 @@ function App() {
   // Handle Items Functions
 
   const handleAddItemSubmit = (data) => {
-    postItem({ name: data.name, type: data.weatherType, link: data.link })
+    postItem({ name: data.name, type: data.weather, imageUrl: data.link })
         .then((addedItem) => {
             setClothingItems(prevItems => [...prevItems, addedItem]); // Add the new item to clothingItems state
         })
@@ -113,6 +146,17 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F"); 
   }
 
+    // useEffect(() => {
+  //   const token= localStorage.getItem("jwt");
+  //   if (token) {
+  //     checkToken(token)
+  //     .then((userData) => {
+  //       setIsLoggedIn(true);
+  //       console.log(userData)
+  //     })
+  //   }
+  // })
+
   useEffect(() => {
     getForcastWeather()
       .then((data) => {
@@ -132,11 +176,10 @@ function App() {
       .catch(console.error)
 }, []);
 
-const isLoggedIn = (true)
-
   return (
     <BrowserRouter>
     <div>
+      <CurrentUserContext.Provider value={currentUser} > 
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}} >
       <Header 
         date={currentDate}
@@ -162,10 +205,10 @@ const isLoggedIn = (true)
       </Switch>
       <Footer/>
       {activeModal === "login" && ( 
-        <LoginModal handleCloseModal={handleCloseModal} isOpen={activeModal === "login"} onAddItem={handleAddItemSubmit}/>
+        <LoginModal handleCloseModal={handleCloseModal} isOpen={activeModal === "login"} onLogin={handleLogin}/>
       )}
       {activeModal === "register" && ( 
-        <RegisterModal handleCloseModal={handleCloseModal} isOpen={activeModal === "register"} onAddItem={handleAddItemSubmit}/>
+        <RegisterModal handleCloseModal={handleCloseModal} isOpen={activeModal === "register"} onRegister={handleRegister}/>
       )}
       {activeModal === "create" && (
         <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={handleAddItemSubmit} />
@@ -183,6 +226,7 @@ const isLoggedIn = (true)
         <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={() => handleDeleteItem(selectedCard)}  />
       )}
       </CurrentTemperatureUnitContext.Provider>
+      </CurrentUserContext.Provider>
     </div>
     </BrowserRouter>
   );

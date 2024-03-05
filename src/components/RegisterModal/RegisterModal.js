@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ handleCloseModal , onAddItem, isOpen }) => {
+const RegisterModal = ({ handleCloseModal , onRegister, isOpen }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
@@ -45,8 +45,7 @@ const RegisterModal = ({ handleCloseModal , onAddItem, isOpen }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Change func to add user to backend
-        console.log({ email, password, name, avatar })
+        onRegister({ email, password, name, avatar })
         handleCloseModal()
     }
 
@@ -98,7 +97,7 @@ const RegisterModal = ({ handleCloseModal , onAddItem, isOpen }) => {
             <label className="form__label">
               <p className="form__title">Password*</p>
               <input
-                type="text"
+                type="password"
                 className="form__input"
                 name="password"
                 placeholder="Password"

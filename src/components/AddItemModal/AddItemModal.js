@@ -83,7 +83,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
               <input
                 type="url"
                 className="form__input"
-                name="link"
+                name="imageUrl"
                 placeholder="Image URL"
                 required
                 value={imageUrl}
@@ -97,7 +97,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
               <input 
                 type="radio" 
                 id="hot" 
-                name="weatherType" 
+                name="weather" 
                 value="hot" 
                 checked={weather === 'hot'}
                 onChange={handleWeatherType} 
@@ -108,7 +108,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
               <input 
                 type="radio" 
                 id="warm" 
-                name="weatherType" 
+                name="weather" 
                 value="warm"
                 checked={weather === 'warm'}
                 onChange={handleWeatherType}
@@ -119,7 +119,7 @@ const AddItemModal = ({ handleCloseModal , onAddItem, isOpen }) => {
               <input 
                 type="radio" 
                 id="cold" 
-                name="weatherType" 
+                name="weather" 
                 value="cold"
                 checked={weather === 'cold'}
                 onChange={handleWeatherType}

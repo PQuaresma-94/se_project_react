@@ -1,7 +1,7 @@
 import { processServerResponse, baseUrl } from './utils.js';
 
 export const register = ( email, password, name, avatar ) => {
-    return fetch(`${BASE_URL}/signup`, {
+    return fetch(`${baseUrl}/signup`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -27,17 +27,17 @@ export const authorize = ( email, password ) => {
     })
     .then(processServerResponse)
     .then((data) => {
-        if (data.user) {
-          localStorage.setItem('jwt', data.jwt);
+        if (data) {
+          localStorage.setItem('jwt', data.token);
     
-          return data;
+          return data.token;
         }
       })
       .catch(err => console.log(err))
 };
 
 export const checkToken = (token) => {
-    return fetch(`${BASE_URL}/users/me`, {
+    return fetch(`${baseUrl}/users/me`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -46,5 +46,7 @@ export const checkToken = (token) => {
       }
     })
     .then(processServerResponse)
-    .then(data => data)
+    .then((userData) => {
+      return userData
+    });
   }
