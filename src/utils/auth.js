@@ -33,7 +33,6 @@ export const authorize = ( email, password ) => {
           return data.token;
         }
       })
-      .catch(err => console.log(err))
 };
 
 export const checkToken = (token) => {
@@ -48,5 +47,5 @@ export const checkToken = (token) => {
     .then(processServerResponse)
     .then((userData) => {
       return userData
-    });
+    })
   }

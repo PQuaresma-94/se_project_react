@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ handleCloseModal , onRegister, isOpen }) => {
+const RegisterModal = ({ handleCloseModal , onRegister, isOpen , onSwitch }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
@@ -50,9 +50,9 @@ const RegisterModal = ({ handleCloseModal , onRegister, isOpen }) => {
     }
 
     const handleSwitch = (e) => {
-        console.log(e)
+      onSwitch()
     } 
-
+    
     useEffect(() => {
       if (isOpen) {
           setEmail("");

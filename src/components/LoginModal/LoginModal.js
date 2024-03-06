@@ -2,12 +2,13 @@ import React, {useState, useEffect} from "react";
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ handleCloseModal , onLogin , isOpen }) => {
+const LoginModal = ({ handleCloseModal , onLogin , isOpen , onSwitch }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
   
     const [isEmailValid, setIsEmailValid] = useState(false)
     const [isPasswordValid, setIsPasswordValid] = useState(false)
+    const [isPasswordError, setIsPasswordError] = useState(false);
   
     const [isButtonEnabled, setIsButtonEnabled] = useState(false)
   
@@ -27,11 +28,24 @@ const LoginModal = ({ handleCloseModal , onLogin , isOpen }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        onLogin ({ email, password })
-        handleCloseModal()
+        onLogin ({ email, password }) 
+        .then((isUserValid) => {
+          if (isUserValid) {
+            handleCloseModal()
+          }})
+        .catch((error) => {
+          handlePasswordError()
+          console.error(error)
+        }
+        ) 
     }
+
+    const handlePasswordError = () => {
+        setIsPasswordError(true);
+    }
+    
     const handleSwitch = (e) => {
-        console.log(e)
+      onSwitch()
     } 
 
     useEffect(() => {
@@ -41,6 +55,7 @@ const LoginModal = ({ handleCloseModal , onLogin , isOpen }) => {
           setIsEmailValid(false);
           setIsPasswordValid(false);
           setIsButtonEnabled(false);
+          setIsPasswordError(false);
       }
   }, [isOpen]);
 
@@ -72,10 +87,12 @@ const LoginModal = ({ handleCloseModal , onLogin , isOpen }) => {
           </div>
           <div>
             <label className="form__label">
-              <p className="form__title">Password</p>
+            <p className={`form__title ${isPasswordError ? "form__title-error" : ""}`}>
+              {isPasswordError ? "Incorrect password" : "Password"}
+            </p>
               <input
                 type="password"
-                className="form__input"
+                className={`form__input ${isPasswordError ? 'form__input-error' : ''}`}
                 name="password"
                 placeholder="Password"
                 required

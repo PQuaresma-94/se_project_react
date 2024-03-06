@@ -46,18 +46,22 @@ function App() {
   }
 
   const handleLogin = (data) => {
-    authorize(data.email, data.password)
-      .then((res) => {
-        checkToken(res)
-        .then((userData) => {
-          console.log(userData)
-          setCurrentUser(userData)
-          setIsLoggedIn(true)
+    return new Promise ((resolve, reject) => {
+      authorize(data.email, data.password)
+        .then((res) => {
+          checkToken(res)
+          .then((userData) => {
+            setCurrentUser(userData)
+            setIsLoggedIn(true)
+            resolve(true)
+          })
         })
-      })
-      .catch(error => {
-        console.error("Error Login In:", error);
-    });
+        .catch(error => {
+            console.error("Login In Error:", error);
+            reject(error)
+          }
+      );
+    })
   }
 
   // Handle Modal Functions
@@ -153,7 +157,8 @@ function App() {
   //     .then((userData) => {
   //       setIsLoggedIn(true);
   //       console.log(userData)
-  //     })
+  //     }) 
+  //    setIsLoggedIn(false);  
   //   }
   // })
 
@@ -205,10 +210,10 @@ function App() {
       </Switch>
       <Footer/>
       {activeModal === "login" && ( 
-        <LoginModal handleCloseModal={handleCloseModal} isOpen={activeModal === "login"} onLogin={handleLogin}/>
+        <LoginModal handleCloseModal={handleCloseModal} isOpen={activeModal === "login"} onLogin={handleLogin} onSwitch={handleRegisterModal} />
       )}
       {activeModal === "register" && ( 
-        <RegisterModal handleCloseModal={handleCloseModal} isOpen={activeModal === "register"} onRegister={handleRegister}/>
+        <RegisterModal handleCloseModal={handleCloseModal} isOpen={activeModal === "register"} onRegister={handleRegister} onSwitch={handleLoginModal} />
       )}
       {activeModal === "create" && (
         <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={handleAddItemSubmit} />

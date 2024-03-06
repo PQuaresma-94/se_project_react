@@ -111,6 +111,10 @@
   margin: 0 0 8px 0;
 }
 
+.form__title-error {
+  color: #ff4d00;
+}
+
 .form__input {
   padding: 4px 0;
   border: none;
@@ -123,6 +127,10 @@
 
 .form__input::placeholder {
   color: rgba(0, 0, 0, 0.5);
+}
+
+.form__input-error {
+  color: #ff4d00;
 }
 
 .form__radio-buttons {

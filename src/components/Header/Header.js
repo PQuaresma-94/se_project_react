@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import LogoImage from '../../images/Logo.svg';
-import AvatarImage from '../../images/Avatar.svg';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import "./Header.css";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
