@@ -10,8 +10,8 @@ export const register = ( email, password, name, avatar ) => {
       body: JSON.stringify({ email, password, name, avatar })
     })
     .then(processServerResponse)
-    .then((res) => {
-      return res;
+    .then((data) => {
+      return data;
     })
     .catch((err) => console.log(err));
   };

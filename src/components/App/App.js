@@ -35,10 +35,12 @@ function App() {
   // Handle User Functions
 
   const handleRegister = (data) => {
-    console.log(data)
+    const userEmail = data.email
+    const userPassword = data.password
     register( data.email, data.password, data.name, data.avatar )
-        .then((res) => {
-            return console.log(res.email, res.password)
+        .then(() => {
+            const userData = ({email: userEmail, password: userPassword})
+            handleLogin(userData)
         })
         .catch(error => {
             console.error("Error creating a new user:", error);
@@ -150,17 +152,20 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F"); 
   }
 
-    // useEffect(() => {
-  //   const token= localStorage.getItem("jwt");
-  //   if (token) {
-  //     checkToken(token)
-  //     .then((userData) => {
-  //       setIsLoggedIn(true);
-  //       console.log(userData)
-  //     }) 
-  //    setIsLoggedIn(false);  
-  //   }
-  // })
+  useEffect(() => {
+    const token= localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+      .then((userData) => {
+        setCurrentUser(userData)
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.error(err)
+        setIsLoggedIn(false);
+      });
+  }
+}, []);
 
   useEffect(() => {
     getForcastWeather()
