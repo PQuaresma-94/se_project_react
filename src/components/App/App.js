@@ -14,7 +14,7 @@ import { getForcastWeather, parseWeatherData, locationData } from '../../utils/W
 import { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
-import { BrowserRouter, Switch , Route } from 'react-router-dom/cjs/react-router-dom.min';
+import { BrowserRouter, Switch , Route } from 'react-router-dom';
 import { getItems, postItem, deleteItem } from '../../utils/api';
 import { register, authorize, checkToken } from '../../utils/auth';
 import './App.css';
@@ -64,6 +64,11 @@ function App() {
           }
       );
     })
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
   }
 
   // Handle Modal Functions
@@ -210,7 +215,8 @@ function App() {
           onSelectCard={handleSelectedCard} 
           onCreateModal={handleCreateModal} 
           clothingItems={clothingItems} 
-          onEditProfileModal={handleEditProfileModal} >
+          onEditProfileModal={handleEditProfileModal} 
+          onLogout={handleLogout}>
         </ProtecteRoute>
       </Switch>
       <Footer/>
