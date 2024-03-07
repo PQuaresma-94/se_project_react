@@ -15,7 +15,7 @@ import { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTemperatureUnitContext';
 import { BrowserRouter, Switch , Route } from 'react-router-dom';
-import { getItems, postItem, deleteItem } from '../../utils/api';
+import { getItems, postItem, deleteItem, updateUserProfile } from '../../utils/api';
 import { register, authorize, checkToken } from '../../utils/auth';
 import './App.css';
 
@@ -69,6 +69,13 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+  }
+
+  const handleEditUserProfile = (data) => {
+    updateUserProfile(data)
+    .then((userData) => {
+      setCurrentUser(userData)
+    })
   }
 
   // Handle Modal Functions
@@ -230,7 +237,7 @@ function App() {
         <AddItemModal handleCloseModal={handleCloseModal} isOpen={activeModal === "create"} onAddItem={handleAddItemSubmit} />
       )}
       {activeModal === "edit-profile" && (
-        <EditProfileModal handleCloseModal={handleCloseModal} isOpen={activeModal === "edit-profile"} onAddItem={handleAddItemSubmit} />
+        <EditProfileModal handleCloseModal={handleCloseModal} isOpen={activeModal === "edit-profile"} onEditUser={handleEditUserProfile} />
       )}
       {activeModal === "preview" && (
         <ItemModal 

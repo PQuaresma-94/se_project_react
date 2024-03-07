@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const EditProfileModal = ({ handleCloseModal , onAddItem, isOpen }) => {
+const EditProfileModal = ({ handleCloseModal , onEditUser , isOpen }) => {
     const {currentUser} = useContext(CurrentUserContext);
     const [name, setName] = useState("")
     const [avatar, setAvatar] = useState("")
@@ -28,7 +28,7 @@ const EditProfileModal = ({ handleCloseModal , onAddItem, isOpen }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({name, avatar})
+        onEditUser({name, avatar})
         handleCloseModal()
     }
 
@@ -36,8 +36,8 @@ const EditProfileModal = ({ handleCloseModal , onAddItem, isOpen }) => {
       if (isOpen) {
           setName(currentUser.name);
           setAvatar(currentUser.avatar);
-          setIsNameValid(false);
-          setIsAvatarValid(false);
+          setIsNameValid(true);
+          setIsAvatarValid(true);
           setIsButtonEnabled(true);
       }
   }, [isOpen]);
