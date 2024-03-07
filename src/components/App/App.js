@@ -213,7 +213,7 @@ function App() {
       />
       <Switch>
         <Route exact path="/">
-          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems} />
+          <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} clothingItems={clothingItems} isLoggedIn={isLoggedIn} />
         </Route>
         <ProtecteRoute 
           path="/profile" 
@@ -223,7 +223,8 @@ function App() {
           onCreateModal={handleCreateModal} 
           clothingItems={clothingItems} 
           onEditProfileModal={handleEditProfileModal} 
-          onLogout={handleLogout}>
+          onLogout={handleLogout}
+          isAutherized={isLoggedIn}>
         </ProtecteRoute>
       </Switch>
       <Footer/>

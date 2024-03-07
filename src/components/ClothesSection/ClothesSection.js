@@ -2,7 +2,7 @@ import React from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import './ClothesSection.css';
 
-const ClothesSection = ({ onCreateModal , onSelectCard, clothingItems }) => {
+const ClothesSection = ({ onCreateModal , onSelectCard, clothingItems, isLoggedIn }) => {
     return (
         <section className="clothes" id="clothes-section">
             <div className="clothes__header">
@@ -11,7 +11,7 @@ const ClothesSection = ({ onCreateModal , onSelectCard, clothingItems }) => {
             </div>
             <div className="clothes__items">
                 {clothingItems.map((item) => (
-                    <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
+                    <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} isLoggedIn={isLoggedIn}/>
                 ))}
             </div>
         </section>

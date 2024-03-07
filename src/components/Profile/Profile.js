@@ -3,11 +3,11 @@ import './Profile.css';
 import SideBar from '../SideBar/SideBar';
 import ClothesSection from '../ClothesSection/ClothesSection';
 
-const Profile = ({ onSelectCard , onCreateModal, clothingItems, onEditProfileModal, onLogout }) => {
+const Profile = ({ onSelectCard , onCreateModal, clothingItems, onEditProfileModal, onLogout, isAutherized }) => {
     return (
             <section className="profile">
                 <SideBar onEditProfileModal={onEditProfileModal} onLogout={onLogout} />
-                <ClothesSection onSelectCard={onSelectCard} onCreateModal={onCreateModal} clothingItems={clothingItems} />
+                <ClothesSection onSelectCard={onSelectCard} onCreateModal={onCreateModal} clothingItems={clothingItems} isLoggedIn={isAutherized} />
             </section>
     );
 };
