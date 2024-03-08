@@ -1,9 +1,10 @@
 import { processServerResponse, baseUrl } from './utils.js' 
 
+
 // User Requests
 
 export const updateUserProfile = (userData) => {
-    const token= localStorage.getItem("jwt")
+    const token = localStorage.getItem("jwt")
     return fetch(`${baseUrl}/users/me`, {
         method: "PATCH",
         headers: {
@@ -19,7 +20,7 @@ export const updateUserProfile = (userData) => {
             currentUser: data.updateUser
         }
         return currentUserData;
-      })
+    })
 }
 
 // Items Requests
@@ -30,19 +31,49 @@ export const getItems = () => {
 };
 
 export const postItem = (item) => {
+    const token = localStorage.getItem("jwt")
     return fetch(`${baseUrl}/items`, {
         method: 'POST',
         body: JSON.stringify(item),
         headers: {
-          'Content-Type': 'application/json'
-      }
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
     })
     .then(processServerResponse);
 };
 
 export const deleteItem = (id) => {
+    const token = localStorage.getItem("jwt")
     return fetch(`${baseUrl}/items/${id}`, {
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+    .then(processServerResponse);
+};
+
+export const addCardLike = (id) => {
+    const token = localStorage.getItem("jwt")
+    return fetch(`${baseUrl}/items/${id}/likes`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+    .then(processServerResponse);
+};
+
+export const removeCardLike = (id) => {
+    const token = localStorage.getItem("jwt")
+    return fetch(`${baseUrl}/items/${id}/likes`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
     })
     .then(processServerResponse);
 };
