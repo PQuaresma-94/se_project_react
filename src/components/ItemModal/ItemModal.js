@@ -10,7 +10,8 @@ const ItemModal = ({
     isLoggedIn
 }) => {
     const {currentUser} = useContext(CurrentUserContext);
-    const isOwner = (selectedCard.owner === currentUser._id) && isLoggedIn;
+    const userId = currentUser ? currentUser._id : null;
+    const isOwner = (selectedCard.owner === userId) && isLoggedIn;
 
     return (
         <div className={`modal modal_type_${name}`}>

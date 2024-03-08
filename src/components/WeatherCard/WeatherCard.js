@@ -2,19 +2,18 @@ import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/Constants";
 
 const WeatherCard = ({ day, type, weatherTemp }) => {
+  const imageSrc = weatherOptions.find(
+    (option) => option.day === day && option.type === type
+  );
 
-    const imageSrc = weatherOptions.find((option) => 
-        option.day === day && option.type === type
-        );
+  const imageSrcUrl = imageSrc.url || "";
 
-    const imageSrcUrl = imageSrc.url || "";
-
-    return (
-        <section className="weather" id="weather-section">
-            <div className="weather__info">{weatherTemp}</div>
-            <img className="weather__image" src={imageSrcUrl} alt="weather"/>
-        </section>
-    );
+  return (
+    <section className="weather" id="weather-section">
+      <div className="weather__info">{weatherTemp}</div>
+      <img className="weather__image" src={imageSrcUrl} alt="weather" />
+    </section>
+  );
 };
 
-export default WeatherCard
+export default WeatherCard;
