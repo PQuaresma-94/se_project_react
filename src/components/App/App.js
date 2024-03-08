@@ -265,7 +265,8 @@ function App() {
         <ItemModal 
           selectedCard={selectedCard} 
           onClose={handleCloseModal}
-          onDelete={handleDeleteModal} />
+          onDelete={handleDeleteModal} 
+          isLoggedIn={isLoggedIn} />
       )}
       {activeModal === "delete" && ( 
         <DeleteConfirmationModal name={"delete"} onClose={handleCloseModal} onConfirmation={() => handleDeleteItem(selectedCard)}  />

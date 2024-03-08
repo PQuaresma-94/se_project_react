@@ -6,10 +6,11 @@ const ItemModal = ({
     onClose,
     selectedCard,
     name, 
-    onDelete
+    onDelete,
+    isLoggedIn
 }) => {
     const {currentUser} = useContext(CurrentUserContext);
-    const isOwn = selectedCard.owner === currentUser._id;
+    const isOwner = (selectedCard.owner === currentUser._id) && isLoggedIn;
 
     return (
         <div className={`modal modal_type_${name}`}>
@@ -21,7 +22,7 @@ const ItemModal = ({
                         <div>{selectedCard.name}</div>
                         <div>Weather: {selectedCard.weather}</div>
                     </div>
-                    {isOwn ?
+                    {isOwner ?
                         (<button className="modal__delete-button" type="button" onClick={onDelete}>Delete item</button>) :
                         ("")
                     }
