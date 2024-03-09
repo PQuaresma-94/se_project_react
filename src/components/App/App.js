@@ -55,6 +55,7 @@ function App() {
       .then(() => {
         const userData = { email: userEmail, password: userPassword };
         handleLogin(userData);
+        handleCloseModal();
       })
       .catch((error) => {
         console.error("Error creating a new user:", error);

@@ -36,10 +36,6 @@ const LoginModal = ({
     onLogin({ email, password });
   };
 
-  const handleSwitch = (e) => {
-    onSwitch();
-  };
-
   useEffect(() => {
     if (isOpen) {
       setEmail("");
@@ -59,7 +55,7 @@ const LoginModal = ({
       onSubmit={handleSubmit}
       isEnable={isButtonEnabled}
       switchButtonText="or Sign Up"
-      onClick={handleSwitch}
+      onClick={onSwitch}
     >
       <div className="form">
         <div>

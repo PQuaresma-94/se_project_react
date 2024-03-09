@@ -54,11 +54,6 @@ const RegisterModal = ({ handleCloseModal, onRegister, isOpen, onSwitch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onRegister({ email, password, name, avatar });
-    handleCloseModal();
-  };
-
-  const handleSwitch = (e) => {
-    onSwitch();
   };
 
   useEffect(() => {
@@ -84,7 +79,7 @@ const RegisterModal = ({ handleCloseModal, onRegister, isOpen, onSwitch }) => {
       onSubmit={handleSubmit}
       isEnable={isButtonEnabled}
       switchButtonText="or Log In"
-      onClick={handleSwitch}
+      onClick={onSwitch}
     >
       <div className="form">
         <div>
