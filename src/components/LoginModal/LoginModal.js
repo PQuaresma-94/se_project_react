@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ handleCloseModal, onLogin, isOpen, onSwitch }) => {
+const LoginModal = ({
+  handleCloseModal,
+  onLogin,
+  isOpen,
+  onSwitch,
+  isPasswordError,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [isPasswordError, setIsPasswordError] = useState(false);
 
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
@@ -28,20 +33,7 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen, onSwitch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin({ email, password })
-      .then((isUserValid) => {
-        if (isUserValid) {
-          handleCloseModal();
-        }
-      })
-      .catch((error) => {
-        handlePasswordError();
-        console.error(error);
-      });
-  };
-
-  const handlePasswordError = () => {
-    setIsPasswordError(true);
+    onLogin({ email, password });
   };
 
   const handleSwitch = (e) => {
@@ -55,7 +47,6 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen, onSwitch }) => {
       setIsEmailValid(false);
       setIsPasswordValid(false);
       setIsButtonEnabled(false);
-      setIsPasswordError(false);
     }
   }, [isOpen]);
 

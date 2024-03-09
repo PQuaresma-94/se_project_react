@@ -39,6 +39,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
+  const [isPasswordError, setIsPasswordError] = useState(false);
 
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -61,20 +62,18 @@ function App() {
   };
 
   const handleLogin = (data) => {
-    return new Promise((resolve, reject) => {
-      authorize(data.email, data.password)
-        .then((res) => {
-          checkToken(res).then((userData) => {
-            setCurrentUser(userData);
-            setIsLoggedIn(true);
-            resolve(true);
-          });
-        })
-        .catch((error) => {
-          console.error("Login In Error:", error);
-          reject(error);
+    authorize(data.email, data.password)
+      .then((res) => {
+        checkToken(res).then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+          handleCloseModal();
         });
-    });
+      })
+      .catch((error) => {
+        console.error("Login In Error:", error);
+        setIsPasswordError(true);
+      });
   };
 
   const handleLogout = () => {
@@ -104,6 +103,7 @@ function App() {
 
   const handleLoginModal = () => {
     setActiveModal("login");
+    setIsPasswordError(false);
   };
 
   const handleEditProfileModal = () => {
@@ -149,7 +149,7 @@ function App() {
       imageUrl: data.imageUrl,
     })
       .then((addedItem) => {
-        setClothingItems((prevItems) => [...prevItems, addedItem]); // Add the new item to clothingItems state
+        setClothingItems((prevItems) => [...prevItems, addedItem]);
       })
       .catch((error) => {
         console.error("Error adding item:", error);
@@ -277,6 +277,7 @@ function App() {
                 isOpen={activeModal === "login"}
                 onLogin={handleLogin}
                 onSwitch={handleRegisterModal}
+                isPasswordError={isPasswordError}
               />
             )}
             {activeModal === "register" && (
