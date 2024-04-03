@@ -1,13 +1,12 @@
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/Constants";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
-const WeatherCard = ({ day, type, weatherTemp }) => {
+const WeatherCard = ({ day, weatherType, weatherTemp }) => {
   const imageSrc = weatherOptions.find(
-    (option) => option.day === day && option.type === type
+    (option) => option.day === day && option.type === weatherType
   );
 
-  const imageSrcUrl = imageSrc.url || "";
+  const imageSrcUrl = imageSrc ? imageSrc.url : "";
 
   return (
     <section className="weather" id="weather-section">

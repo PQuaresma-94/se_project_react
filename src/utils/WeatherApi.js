@@ -23,3 +23,8 @@ export const parseWeatherData = (data) => {
 export const locationData = (data) => {
   return data.name;
 };
+
+export const locationWeatherType = (data) => {
+  const weatherType = data.weather[0].main;
+  return weatherType;
+};

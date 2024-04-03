@@ -14,6 +14,7 @@ import {
   getForcastWeather,
   parseWeatherData,
   locationData,
+  locationWeatherType,
 } from "../../utils/WeatherApi";
 import { useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -35,6 +36,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState("");
   const [weatherTemp, setWeatherTemp] = useState(0);
   const [city, setCity] = useState("");
+  const [weatherType, setWeatherType] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -219,8 +221,10 @@ function App() {
       .then((data) => {
         const location = locationData(data);
         const temp = parseWeatherData(data);
+        const type = locationWeatherType(data);
         setCity(location);
         setWeatherTemp(temp);
+        setWeatherType(type);
       })
       .catch(console.error);
   }, []);
@@ -252,6 +256,7 @@ function App() {
               <Route exact path="/">
                 <Main
                   weatherTemp={weatherTemp}
+                  weatherType={weatherType}
                   onSelectCard={handleSelectedCard}
                   clothingItems={clothingItems}
                   isLoggedIn={isLoggedIn}

@@ -6,6 +6,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 
 const Main = ({
   weatherTemp,
+  weatherType,
   onSelectCard,
   clothingItems,
   isLoggedIn,
@@ -14,7 +15,7 @@ const Main = ({
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
   const numericTemp = parseFloat(weatherTemp?.temperature?.F);
-  const weatherType = useMemo(() => {
+  const weatherTempType = useMemo(() => {
     if (numericTemp >= 86) {
       return "hot";
     } else if (numericTemp >= 66 && numericTemp <= 85) {
@@ -25,12 +26,31 @@ const Main = ({
   }, [weatherTemp]);
 
   const filteredCards = clothingItems.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
+    return item.weather.toLowerCase() === weatherTempType;
   });
+
+  const typeExample = useMemo(() => {
+    const weatherTypeMap = {
+      Clear: "sunny",
+      Clouds: "cloudy",
+      Rain: "rain",
+      Drizzle: "rain",
+      Thunderstorm: "storm",
+      Snow: "snow",
+      Fog: "fog",
+    };
+
+    return weatherTypeMap[weatherType];
+  }, [weatherType]);
 
   return (
     <main className="main">
-      <WeatherCard day={true} type="snow" weatherTemp={temp} />
+      <WeatherCard
+        day={true}
+        type="snow"
+        weatherTemp={temp}
+        weatherType={typeExample}
+      />
       <section className="cards" id="card-section">
         <div className="cards__information">
           Today is {temp}/ You may want to wear:
